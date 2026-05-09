@@ -1,15 +1,19 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+package Modele;
+
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        Persoana p = new Persoana("Ion");
+        p.afisare();
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+        Angajat a = new Angajat("Maria", 3000, "Receptioner");
+        a.afisare();
+        a.gestioneazaRezervare();
+
+        Administrator admin = new Administrator("Andrei", 5000, "Manager");
+        admin.afisare();
+        admin.adaugaCamera();
+
+        Client c = new Client(1, "Elena", "elena@gmail.com", "0722000000");
+        c.afisare();
     }
 }
