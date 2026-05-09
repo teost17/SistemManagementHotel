@@ -19,6 +19,7 @@ public class Administrator extends Angajat {
     }
 
     @Override
+
     public void afisare() {
         System.out.println("Administrator: " + nume);
     }
