@@ -3,23 +3,10 @@ package Modele;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Administrator – extinde Angajat.
- *
- * Relatii de asociatie (conform diagramei UML):
- *   - Administrator gestioneaza o lista de Clienti  (1 Admin -> * Clienti)
- *   - Administrator gestioneaza o lista de Oferte   (1 Admin -> * Oferte)
- *   - Administrator gestioneaza o lista de Camere   (1 Admin -> * Camere)
- */
 public class Administrator extends Angajat {
 
-    // Asociatie: Administrator - Client (1 la *)
     private List<Client> clienti;
-
-    // Asociatie: Administrator - Oferta (1 la *)
     private List<Oferta> oferte;
-
-    // Asociatie: Administrator - Camera (1 la *)
     private List<Camera> camere;
 
     public Administrator(String nume, double salariu, String functie) {
@@ -28,10 +15,6 @@ public class Administrator extends Angajat {
         this.oferte  = new ArrayList<>();
         this.camere  = new ArrayList<>();
     }
-
-    // ---------------------------------------------------------------
-    // Operatii cu Camere
-    // ---------------------------------------------------------------
 
     public void adaugaCamera(Camera camera) {
         camere.add(camera);
@@ -49,6 +32,22 @@ public class Administrator extends Angajat {
         }
     }
 
+    public void modificaDateCamera(int numarCamera, double pretNou, String statusNou) {
+        if (pretNou < 0) throw new IllegalArgumentException("Pretul nu poate fi negativ!");
+        for (Camera c : camere) {
+            if (c.getNumar() == numarCamera) {
+                c.setPret(pretNou);
+                c.setStatus(statusNou);
+                System.out.println("Administratorul " + nume
+                        + " a modificat camera #" + numarCamera
+                        + " -> pret: " + pretNou
+                        + ", status: " + statusNou);
+                return;
+            }
+        }
+        System.out.println("Camera #" + numarCamera + " nu a fost gasita.");
+    }
+
     public List<Camera> getCamere() {
         return camere;
     }
@@ -61,10 +60,6 @@ public class Administrator extends Angajat {
         System.out.println("=== Camere gestionate de " + nume + " ===");
         camere.forEach(Camera::afisare);
     }
-
-    // ---------------------------------------------------------------
-    // Operatii cu Oferte
-    // ---------------------------------------------------------------
 
     public void adaugaOferta(Oferta oferta) {
         oferte.add(oferta);
@@ -94,10 +89,6 @@ public class Administrator extends Angajat {
         oferte.forEach(Oferta::afisare);
     }
 
-    // ---------------------------------------------------------------
-    // Operatii cu Clienti
-    // ---------------------------------------------------------------
-
     public void inregistreazaClient(Client client) {
         clienti.add(client);
         System.out.println("Administratorul " + nume + " a inregistrat clientul: "
@@ -125,8 +116,6 @@ public class Administrator extends Angajat {
         System.out.println("=== Clienti gestionati de " + nume + " ===");
         clienti.forEach(Client::afisare);
     }
-
-    // ---------------------------------------------------------------
 
     @Override
     public void afisare() {
