@@ -22,6 +22,13 @@ public class Main {
 
         System.out.println();
 
+        // --- Modificare date camera ---
+        System.out.println("========== MODIFICARE DATE CAMERA ==========");
+        admin.modificaDateCamera(101, 250.0, "in_mentenanta");
+        admin.afisareCamere();
+
+        System.out.println();
+
         // --- Creare Oferte si adaugare la Administrator ---
         Oferta o1 = new Oferta(1, "Oferta Weekend Relax", Oferta.TipOferta.WEEKEND, 10.0);
         Oferta o2 = new Oferta(2, "Last Minute Summer", Oferta.TipOferta.LAST_MINUTE, 25.0);
@@ -44,10 +51,10 @@ public class Main {
 
         System.out.println();
 
-        // --- Asociere Oferte -> Clienti (Administrator atribuie oferte clientilor) ---
-        client1.adaugaOferta(o1); // Elena primeste oferta weekend
-        client1.adaugaOferta(o3); // Elena primeste si oferta luna de miere
-        client2.adaugaOferta(o2); // Mihai primeste oferta last minute
+        // --- Asociere Oferte -> Clienti ---
+        client1.adaugaOferta(o1);
+        client1.adaugaOferta(o3);
+        client2.adaugaOferta(o2);
 
         System.out.println();
         client1.afisareOferte();
@@ -63,10 +70,10 @@ public class Main {
 
         // --- Rezervare pentru client1 cu oferta aplicata ---
         Rezervare r1 = new Rezervare(1, LocalDate.of(2025, 7, 10), LocalDate.of(2025, 7, 14));
-        double pretBaza = r1.calculeazaPret(c1.getPret()); // 4 nopti * 200 RON = 800 RON
+        double pretBaza = r1.calculeazaPret(c1.getPret());
         System.out.println("Pret baza rezervare: " + pretBaza + " RON");
 
-        double pretFinal = client1.aplicaOfertaLaRezervare(pretBaza); // aplica oferta weekend -10%
+        double pretFinal = client1.aplicaOfertaLaRezervare(pretBaza);
         System.out.println("Pret final dupa oferta: " + pretFinal + " RON");
 
         r1.efectueazaPlata(pretFinal, "card");
@@ -77,10 +84,10 @@ public class Main {
 
         // --- Rezervare pentru client2 cu oferta specifica ---
         Rezervare r2 = new Rezervare(2, LocalDate.of(2025, 8, 1), LocalDate.of(2025, 8, 5));
-        double pretBaza2 = r2.calculeazaPret(c2.getPret()); // 4 nopti * 350 RON = 1400 RON
+        double pretBaza2 = r2.calculeazaPret(c2.getPret());
         System.out.println("Pret baza rezervare: " + pretBaza2 + " RON");
 
-        double pretFinal2 = client2.aplicaOfertaSpecifica(2, pretBaza2); // oferta last minute -25%
+        double pretFinal2 = client2.aplicaOfertaSpecifica(2, pretBaza2);
         System.out.println("Pret final dupa oferta: " + pretFinal2 + " RON");
 
         r2.efectueazaPlata(pretFinal2, "numerar");
