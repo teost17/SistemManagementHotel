@@ -23,9 +23,16 @@ public class Rezervare {
     }
 
     public void efectueazaPlata(double suma, String metoda) {
+        if (suma < 0) throw new IllegalArgumentException("Suma nu poate fi negativa!");
         this.plata = new Plata(this.id, suma, metoda);
         this.plata.proceseazaPlata();
         this.status = "platita";
+    }
+
+    public void anuleaza() {
+        this.plata = null;
+        this.status = "anulata";
+        System.out.println("Rezervarea #" + id + " a fost anulata. Plata asociata a fost distrusa.");
     }
 
     public int getId() { return id; }
@@ -35,6 +42,11 @@ public class Rezervare {
     public Plata getPlata() { return plata; }
 
     public void afisare() {
-        System.out.println("Rezervare #" + id + " | " + dataStart + " -> " + dataFinala + " | Status: " + status);
+        System.out.println("Rezervare #" + id + " | " + dataStart + " -> " + dataFinala
+                + " | Status: " + status);
+        if (plata != null) {
+            System.out.print("  └─ ");
+            plata.afisare();
+        }
     }
 }
